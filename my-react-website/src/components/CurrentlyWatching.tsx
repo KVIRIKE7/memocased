@@ -14,11 +14,14 @@ function renderStars(rating: number | null): string {
 
 export default function CurrentlyWatching({ userShow, show }: CurrentlyWatchingProps) {
   const progress = Math.round((userShow.episodesWatched / show.totalEpisodes) * 100);
+  const isLoading = show.posterUrl === '';
 
   return (
     <div className="currently-watching-card">
       <div className="cw-poster">
-        {show.posterUrl ? (
+        {isLoading ? (
+          <div className="poster-loading" />
+        ) : show.posterUrl ? (
           <img src={show.posterUrl} alt={show.title} />
         ) : (
           <div className="poster-placeholder">

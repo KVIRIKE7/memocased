@@ -5,9 +5,14 @@ interface FavoriteShowProps {
 }
 
 export default function FavoriteShow({ show }: FavoriteShowProps) {
+  // posterUrl is '' while loading (hook hasn't resolved yet), null means "no poster found"
+  const isLoading = show.posterUrl === '';
+
   return (
     <div className="favorite-show" title={show.title}>
-      {show.posterUrl ? (
+      {isLoading ? (
+        <div className="poster-loading" />
+      ) : show.posterUrl ? (
         <img src={show.posterUrl} alt={show.title} />
       ) : (
         <div className="poster-placeholder">
